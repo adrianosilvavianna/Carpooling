@@ -22,14 +22,14 @@ class ProfileRequest extends Request
     public function rules()
     {
         return [
-            'name'              =>  'required|string'    ,
-            'email'             =>  'required|string|email'    ,
-            'cpf'               =>  'required|'    ,
-            'phone'             =>  'required|string'    ,
-            'neighborhood'      =>  'required|string'    ,
-            'address'           =>  'required|string'    ,
-            'number'            =>  'required|string'    ,
-            'city'              =>  'required|string'    ,
+            'name'              =>  'required|string'           ,
+            'email'             =>  'required|string|email'     ,
+            'cpf'               =>  'required|'                 ,
+            'phone'             =>  'required|string'           ,
+            'neighborhood'      =>  'required|string'           ,
+            'address'           =>  'required|string'           ,
+            'number'            =>  'required|string'           ,
+            'city'              =>  'required|string'
         ];
     }
 }

@@ -4,7 +4,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Usuário <a href="#" title="Nova Galeria" ><i class="pull-right glyphicon glyphicon-plus"></i></a>
+            Usuário
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -16,7 +16,7 @@
                 <tbody>
                 <tr>
                     <td>{{ $profile->name }}</td>
-                    <td>{{ $profile->cpf }}</td>
+                    <td>{{ $profile->email }}</td>
                     <td>
                         <a href='{{ route('user.profile.edit', $profile) }}' title=''><i class= 'glyphicon glyphicon-edit'></i></a>
                     </td>

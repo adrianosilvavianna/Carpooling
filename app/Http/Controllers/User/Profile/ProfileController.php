@@ -16,12 +16,27 @@ class ProfileController extends Controller
         $this->profile = $profile;
     }
 
+    public function validator(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name'              =>  'required|string'           ,
+            'email'             =>  'required|string|email'     ,
+            'cpf'               =>  'required|'                 ,
+            'phone'             =>  'required|string'           ,
+            'neighborhood'      =>  'required|string'           ,
+            'address'           =>  'required|string'           ,
+            'number'            =>  'required|string'           ,
+            'city'              =>  'required|string'
+        ]);
+
+        return $validator;
+    }
+
     public function index()
     {
         try{
-            $profile = \Auth::User()->Profile();
-            dd($profile->Profile);
-            if($profile->first()){
+            $profile = \Auth::User();
+            if($profile){
                 return view('profile.index', compact('profile'));
             }else{
                 $user = \Auth::User();
@@ -41,21 +56,11 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'name'              =>  'required|string'           ,
-            'email'             =>  'required|string|email'     ,
-            'cpf'               =>  'required|'                 ,
-            'phone'             =>  'required|string'           ,
-            'neighborhood'      =>  'required|string'           ,
-            'address'           =>  'required|string'           ,
-            'number'            =>  'required|string'           ,
-            'city'              =>  'required|string'
-        ]);
         try{
-            if($validator->fails()){
+            if($this->validator($request)->fails()){
                 return redirect()->back()->with('error', "Campos nao preenchidos");
             }
-            $profile = $this->profile->create($request->input());
+            $this->profile->create($request->input());
             return view('user::profile.index');
         }catch(\Exception $e)
         {
@@ -68,6 +73,9 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         try{
+            if($this->validator($request)->fails()){
+                return redirect()->back()->with('error', "Campos nao preenchidos");
+            }
             $this->profile->find($id)->update($request->input());
             return redirect()->back()->withInput()->with('success', 'ok');
         }catch(\Exception $e)

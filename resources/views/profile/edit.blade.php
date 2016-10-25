@@ -7,7 +7,7 @@
             Editar Perfil
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" method="post"   action="{{ route('profile.update', $profile->id) }}" >
+            <form class="form-horizontal" method="post"   action="{{ route('user.profile.update', $profile->id) }}" >
                 {{ csrf_field() }}
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label for="number_id" class="col-sm-2 control-label">Numero</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="number_id" name="numero" placeholder="Numero" value="{{ $profile->number }}">
+                            <input type="text" class="form-control" id="number_id" name="number" placeholder="Numero" value="{{ $profile->number }}">
                         </div>
                     </div>
                     <div class="form-group">

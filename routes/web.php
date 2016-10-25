@@ -29,6 +29,7 @@ Route::group(['namespace'=> 'User', 'prefix' => 'user', 'as' => 'user.'], functi
         Route::get('/',             ['as' => 'index',   'uses' => 'ProfileController@index' ]);
         Route::get('/edit/{id}',    ['as' => 'edit',   'uses' => 'ProfileController@edit'   ]);
         Route::post('/store',       ['as' => 'store',   'uses' => 'ProfileController@store' ]);
+        Route::post('/update/{id}',       ['as' => 'update',   'uses' => 'ProfileController@update' ]);
 
     });
 });

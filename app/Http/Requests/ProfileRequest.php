@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class ProfileRequest extends Request
 {
     /**
@@ -28,12 +26,10 @@ class ProfileRequest extends Request
             'email'             =>  'required|string|email'    ,
             'cpf'               =>  'required|'    ,
             'phone'             =>  'required|string'    ,
-            'complement'        =>  'string'    ,
             'neighborhood'      =>  'required|string'    ,
             'address'           =>  'required|string'    ,
             'number'            =>  'required|string'    ,
             'city'              =>  'required|string'    ,
-            'country'           =>  'string'    ,
         ];
     }
 }

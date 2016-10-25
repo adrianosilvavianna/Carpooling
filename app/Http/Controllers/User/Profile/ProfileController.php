@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Profile;
 
+use App\Domains\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
@@ -10,11 +11,17 @@ class ProfileController extends Controller
 {
     protected $profile;
 
+    public function __construct(Profile $profile)
+    {
+        $this->profile = $profile;
+    }
+
     public function index()
     {
         try{
-            $this->profile = \Auth::User()->Profile();
-            if($this->profile->first()){ //first ta feio tem como melhorar esse cod
+            $profile = \Auth::User()->Profile();
+            dd($profile->Profile);
+            if($profile->first()){
                 return view('profile.index', compact('profile'));
             }else{
                 $user = \Auth::User();
@@ -32,17 +39,28 @@ class ProfileController extends Controller
         return view('profile.edit')->with('profile', $this->profile->find($id));
     }
 
-    public function store(ProfileRequest $request)
+    public function store(Request $request)
     {
-        echo "opa";
-        /*try{
-
+        $validator = \Validator::make($request->all(), [
+            'name'              =>  'required|string'           ,
+            'email'             =>  'required|string|email'     ,
+            'cpf'               =>  'required|'                 ,
+            'phone'             =>  'required|string'           ,
+            'neighborhood'      =>  'required|string'           ,
+            'address'           =>  'required|string'           ,
+            'number'            =>  'required|string'           ,
+            'city'              =>  'required|string'
+        ]);
+        try{
+            if($validator->fails()){
+                return redirect()->back()->with('error', "Campos nao preenchidos");
+            }
             $profile = $this->profile->create($request->input());
-            return view('profile.index', compact('profile'));
+            return view('user::profile.index');
         }catch(\Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());
-        }*/
+        }
     }
 
 

@@ -27,9 +27,20 @@ Route::group(['namespace'=> 'User', 'prefix' => 'user', 'as' => 'user.'], functi
 
     Route::group(['namespace'=> 'Profile', 'prefix' => 'profile', 'as' => 'profile.'], function(){
         Route::get('/',             ['as' => 'index',   'uses' => 'ProfileController@index' ]);
-        Route::get('/edit/{id}',    ['as' => 'edit',   'uses' => 'ProfileController@edit'   ]);
+        Route::get('/create',       ['as' => 'create',   'uses' => 'ProfileController@create' ]);
+        Route::get('/edit',         ['as' => 'edit',   'uses' => 'ProfileController@edit'   ]);
         Route::post('/store',       ['as' => 'store',   'uses' => 'ProfileController@store' ]);
-        Route::post('/update/{id}',       ['as' => 'update',   'uses' => 'ProfileController@update' ]);
+        Route::post('/update',      ['as' => 'update',   'uses' => 'ProfileController@update' ]);
+
+    });
+
+    Route::group(['namespace'=> 'Car', 'prefix' => 'car', 'as' => 'car.'], function(){
+        Route::get('/',             ['as' => 'index',       'uses' =>   'CarController@index' ]);
+        Route::get('/create',       ['as' => 'create',      'uses' =>  'CarController@create' ]);
+        Route::post('/store',       ['as' => 'store',       'uses' =>   'CarController@store' ]);
+        Route::get('/edit',         ['as' => 'edit',        'uses' =>    'CarController@edit'   ]);
+
+        Route::post('/update',      ['as' => 'update',      'uses' =>  'CarController@update' ]);
 
     });
 });

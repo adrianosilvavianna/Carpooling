@@ -9,7 +9,7 @@
         <div class="panel-body">
             <form class="form-horizontal" method="post" action="{{ route('user.profile.store') }}" >
             {{ csrf_field() }}
-                <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="name_id" class="col-sm-2 control-label">Nome</label>
@@ -17,12 +17,14 @@
                             <input type="text" class="form-control"  name="name" id="name_id" value="{{ $user->name }}">
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="email_id" class="col-sm-2 control-label">Email</label>
+                        <label for="email_id" class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" name="email" id="email_id" value="{{ $user->email }}">
+                            <input type="text" class="form-control"  name="email" id="email_id" placeholder="name" value="{{ $user->email }}">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="cpf_id" class="col-sm-2 control-label">Cpf</label>
                         <div class="col-sm-10">

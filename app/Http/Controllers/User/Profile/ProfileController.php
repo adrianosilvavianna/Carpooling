@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User\Profile;
 
 use App\Domains\Profile;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -20,7 +19,7 @@ class ProfileController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'name'              =>  'required|string'           ,
-            'email'             =>  'required|string|email'     ,
+            'email'              =>  'required|string'           ,
             'cpf'               =>  'required|'                 ,
             'phone'             =>  'required|string'           ,
             'neighborhood'      =>  'required|string'           ,
@@ -35,9 +34,9 @@ class ProfileController extends Controller
     public function index()
     {
         try{
-            $profile = \Auth::User();
+            $profile = \Auth::User()->Profile;
             if($profile){
-                return view('profile.index', compact('profile'));
+                return view('profile.edit', compact('profile'));
             }else{
                 $user = \Auth::User();
                 return view('profile.create', compact('user'));
@@ -49,9 +48,9 @@ class ProfileController extends Controller
         }
     }
 
-    public function edit($id)
+    public function create()
     {
-        return view('profile.edit')->with('profile', $this->profile->find($id));
+        return view('profile.create');
     }
 
     public function store(Request $request)
@@ -60,23 +59,29 @@ class ProfileController extends Controller
             if($this->validator($request)->fails()){
                 return redirect()->back()->with('error', "Campos nao preenchidos");
             }
-            $this->profile->create($request->input());
-            return view('user::profile.index');
+
+            $profile = $this->profile->create($request->input());
+            return view('profile.edit', compact('profile'));
         }catch(\Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-
-
-    public function update(Request $request, $id)
+    public function edit()
     {
+        $profile = \Auth::User();
+        return view('profile.edit', compact('profile'));
+    }
+
+    public function update(Request $request)
+    {
+        $this->profile = \Auth::User();
         try{
             if($this->validator($request)->fails()){
                 return redirect()->back()->with('error', "Campos nao preenchidos");
             }
-            $this->profile->find($id)->update($request->input());
+            $this->profile->update($request->input());
             return redirect()->back()->withInput()->with('success', 'ok');
         }catch(\Exception $e)
         {

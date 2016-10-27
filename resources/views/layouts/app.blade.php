@@ -69,12 +69,12 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="{!! route('home') !!}"><svg class="glyph stroked desktop"><use xlink:href="#stroked-desktop"/></svg>
+        <li class="active"><a href="{!! route('home') !!}">
                 Home </a></li>
 
-        <li><a href="widgets.html"><svg class="glyph stroked location pin"><use xlink:href="#stroked-location-pin"/></svg> Caronas </a></li>
-        <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Veiculos </a></li>
-        <li><a href="tables.html"><svg class="glyph stroked car"><use xlink:href="#stroked-table"></use></svg> Perfil </a></li>
+        <li><a href="widgets.html"> Caronas </a></li>
+        <li><a href="charts.html"> Veiculos </a></li>
+        <li><a href="tables.html"> Perfil </a></li>
 
         <li role="presentation" class="divider"></li>
 

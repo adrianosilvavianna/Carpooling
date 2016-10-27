@@ -1,3 +1,5 @@
-# Laravel PHP Framework
+Laravel PHP Framewok
 
-#php artisan make:auth
+php artisan make:auth
+
+

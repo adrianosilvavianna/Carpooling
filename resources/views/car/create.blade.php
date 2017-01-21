@@ -8,7 +8,7 @@
         </div>
         <div class="panel-body">
             <form class="form-horizontal" method="post" action="{{ route('user.car.store') }}" >
-            {{ csrf_field() }}
+                {{ csrf_field() }}
                 <input type="hidden" name="user_id" value="{{ \Auth::User()->id }}">
                 <div class="col-lg-6">
                     <div class="form-group">

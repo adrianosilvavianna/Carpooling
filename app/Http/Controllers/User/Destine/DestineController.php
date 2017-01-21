@@ -4,7 +4,8 @@ namespace App\Http\Controllers\User\Destine;
 
 use App\Domains\Destine;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DestineRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\LocationRequest;
 
 class DestineController extends Controller
 {
@@ -17,12 +18,8 @@ class DestineController extends Controller
 
     public function index()
     {
-        try{
-            $destines = $this->getUser()->Destines->all();
-            return view('destine.index')->with('destines', $destines);
-        }catch (\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $destines = $this->getUser()->Destine;
+        return view('destine.index', compact('destines'));
     }
 
     public function create()
@@ -30,38 +27,38 @@ class DestineController extends Controller
         return view('destine.create');
     }
 
-    public function store(DestineRequest $request)
+    public function store(LocationRequest $request, Destine $destine)
     {
         try{
-            $this->getUser()->Destines()->create($request->input());
-            return redirect(route('destine.index'));
+            $destine = $destine->create(['user_id' => $this->getUser()->id]);
+            $destine->Location()->create($request->input('location'));
+            return redirect()->route('user.destine.index')->with('success', 'Cadastro Realizado!');
         }catch (\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-    public function edit($id)
+    public function edit(Destine $destine)
     {
-        $destine = $this->destine->find($id);
         return view('destine.edit',compact('destine'));
     }
 
-    public function update(DestineRequest $request, $id)
+    public function update(Destine $destine, LocationRequest $request)
     {
         try{
-            $this->destine->find($id)->update($request->input());
-            return redirect(route('destine.index'));
+            $destine->Location()->update($request->input('location'));
+            return redirect(route('user.destine.index'))->with('success', 'Cadastro Atualizado!');
         }catch (\Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-    public function destroy($id)
+    public function destroy(Destine $destine)
     {
         try{
-            $this->destine->find($id)->ForceDelete();
-            return redirect()->back()->with('success', 'Excluido');
+            $destine->ForceDelete();
+            return redirect(route('user.destine.index'))->with('success', 'Excluido!');
         }catch (\Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());

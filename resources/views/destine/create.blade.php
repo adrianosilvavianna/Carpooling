@@ -8,18 +8,19 @@
         </div>
         <div class="panel-body">
 
-            <form action="{{route('destine.store')}}" class="form-horizontal">
-                <div class="col-lg-10">
-                    @include('location._inputs')
-                    <div class="form-group pull-right">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Criar</button>
-                        </div>
-                    </div>
+            {!! Form::model(['destine' => '', 'location' => ''], ['route' => ['user.destine.store'], 'class' => 'form-horizontal', 'role' => 'form'] ) !!}
+            {{ method_field('POST') }}
+            @include('location._inputs1')
+            <div class="form-group pull-right">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Criar</button>
                 </div>
-            </form>
-
+            </div>
+            {!! Form::close() !!}
         </div>
+        </form>
+
+    </div>
     </div>
 
 @endsection

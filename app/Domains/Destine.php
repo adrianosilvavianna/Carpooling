@@ -6,10 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destine extends Model
 {
-    protected $fillable = ['address', 'complement', 'cep', 'neighborhood', 'city', 'uf', 'phone', 'user_id'];
+    protected $fillable = ['user_id'];
 
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Location()
+    {
+        return $this->morphOne(Location::class, 'locationable');
+    }
+    //delete Location and Representative Cascade
+    function delete()
+    {
+        $this->Location()->forceDelete();
+        parent::delete();
     }
 }

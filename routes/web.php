@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/home', ['as' =>'home', 'uses' => 'HomeController@index']);
 
-Route::group(['namespace'=> 'User', 'prefix' => 'user', 'as' => 'user.'], function(){
+Route::group(['namespace'=> 'User', 'middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('/',                 ['as' => 'index',   'uses' => 'UserController@index'    ]);
     Route::get('/edit/{id}',        ['as' => 'edit',   'uses' => 'UserController@edit'      ]);
     Route::post('/update/{id}',     ['as' => 'update',   'uses' => 'UserController@update'  ]);
@@ -30,7 +30,7 @@ Route::group(['namespace'=> 'User', 'prefix' => 'user', 'as' => 'user.'], functi
         Route::get('/create',       ['as' => 'create',   'uses' => 'ProfileController@create' ]);
         Route::get('/edit',         ['as' => 'edit',   'uses' => 'ProfileController@edit'   ]);
         Route::post('/store',       ['as' => 'store',   'uses' => 'ProfileController@store' ]);
-        Route::post('/update',      ['as' => 'update',   'uses' => 'ProfileController@update' ]);
+        Route::put('/update',      ['as' => 'update',   'uses' => 'ProfileController@update' ]);
 
     });
 
@@ -38,9 +38,18 @@ Route::group(['namespace'=> 'User', 'prefix' => 'user', 'as' => 'user.'], functi
         Route::get('/',             ['as' => 'index',       'uses' =>   'CarController@index' ]);
         Route::get('/create',       ['as' => 'create',      'uses' =>  'CarController@create' ]);
         Route::post('/store',       ['as' => 'store',       'uses' =>   'CarController@store' ]);
-        Route::get('/edit',         ['as' => 'edit',        'uses' =>    'CarController@edit'   ]);
+        Route::get('/{car}/edit',         ['as' => 'edit',        'uses' =>    'CarController@edit'   ]);
+        Route::post('/{car}/update',      ['as' => 'update',      'uses' =>  'CarController@update' ]);
+        Route::get('/{car}/delete',      ['as' => 'delete',      'uses' =>  'CarController@destroy' ]);
 
-        Route::post('/update',      ['as' => 'update',      'uses' =>  'CarController@update' ]);
+    });
 
+    Route::group(['namespace'=> 'Destine', 'prefix' => 'destine', 'as' => 'destine.'], function(){
+        Route::get('/',             ['as' => 'index',       'uses' =>   'DestineController@index' ]);
+        Route::get('/create',       ['as' => 'create',      'uses' =>  'DestineController@create' ]);
+        Route::post('/store',       ['as' => 'store',       'uses' =>   'DestineController@store' ]);
+        Route::get('{destine}/edit',         ['as' => 'edit',        'uses' =>    'DestineController@edit'   ]);
+        Route::put('{destine}/update',      ['as' => 'update',      'uses' =>  'DestineController@update' ]);
+        Route::get('{destine}/delete',      ['as' => 'delete',      'uses' =>  'DestineController@destroy' ]);
     });
 });

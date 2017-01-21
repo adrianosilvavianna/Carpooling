@@ -11,7 +11,7 @@ class ProfileRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,13 +22,12 @@ class ProfileRequest extends Request
     public function rules()
     {
         return [
-            'name'              =>  'required|string'           ,
-            'email'             =>  'required|string|email'     ,
-            'cpf'               =>  'required|'                 ,
-            'phone'             =>  'required|string'           ,
+            'profile.name'              =>  'required|string'           ,
+            'profile.email'             =>  'required|string|email'     ,
+            'profile.cpf'               =>  'required|'                 ,
+            'profile.phone'             =>  'required|string'           ,
             'neighborhood'      =>  'required|string'           ,
             'address'           =>  'required|string'           ,
-            'number'            =>  'required|string'           ,
             'city'              =>  'required|string'
         ];
     }

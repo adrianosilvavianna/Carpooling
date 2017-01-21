@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Profile;
 
 use App\Domains\Profile;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -18,14 +19,13 @@ class ProfileController extends Controller
     public function validator(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'name'              =>  'required|string'           ,
-            'email'              =>  'required|string'           ,
-            'cpf'               =>  'required|'                 ,
-            'phone'             =>  'required|string'           ,
-            'neighborhood'      =>  'required|string'           ,
-            'address'           =>  'required|string'           ,
-            'number'            =>  'required|string'           ,
-            'city'              =>  'required|string'
+            'profile.name'              =>  'required|string'           ,
+            'profile.email'              =>  'required|string|email'           ,
+            'profile.phone'             =>  'required|string'           ,
+            'profile.cpf'               =>  'required|'                 ,
+            'location.neighborhood'      =>  'required|string'           ,
+            'location.address'           =>  'required|string'           ,
+            'location.city'              =>  'required|string'           ,
         ]);
 
         return $validator;
@@ -34,12 +34,11 @@ class ProfileController extends Controller
     public function index()
     {
         try{
-            $profile = \Auth::User()->Profile;
+            $profile = $this->getUser()->Profile;
             if($profile){
-                return view('profile.edit', compact('profile'));
+                return redirect()->route('user.profile.edit');
             }else{
-                $user = \Auth::User();
-                return view('profile.create', compact('user'));
+                return redirect()->route('user.profile.create');
             }
 
         }catch(\Exception $e)
@@ -60,8 +59,9 @@ class ProfileController extends Controller
                 return redirect()->back()->with('error', "Campos nao preenchidos");
             }
 
-            $profile = $this->profile->create($request->input());
-            return view('profile.edit', compact('profile'));
+            $profile = $this->getUser()->Profile()->create($request->input('profile'));
+            $profile->Location()->create($request->input('location'));
+            return redirect()->route('user.profile.edit')->with('success', 'Perfil Cadastrado!');
         }catch(\Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());
@@ -70,7 +70,7 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        $profile = \Auth::User();
+        $profile = $this->getUser()->Profile;
         return view('profile.edit', compact('profile'));
     }
 
@@ -82,7 +82,7 @@ class ProfileController extends Controller
                 return redirect()->back()->with('error', "Campos nao preenchidos");
             }
             $this->profile->update($request->input());
-            return redirect()->back()->withInput()->with('success', 'ok');
+            return redirect()->back()->withInput()->with('success', 'Perfil Atualizado');
         }catch(\Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());

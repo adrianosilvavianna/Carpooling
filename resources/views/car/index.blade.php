@@ -4,7 +4,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Carros | <a href="{{ route('user.car.create') }}">+ Novo</a>
+            Carros  <a href="{{ route('user.car.create') }}" title="Nova Galeria" ><i class="pull-right glyphicon glyphicon-plus"></i></a>
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -22,6 +22,11 @@
                         <td>{{ $car->color }}</td>
                         <td>{{ $car->capacity }}</td>
                         <td>{{ $car->board }}</td>
+                        <td>
+                            <a href='{{ route('user.car.edit', $car) }}' title='Editar'><i class= 'glyphicon glyphicon-edit'></i></a>
+                            <a href='{{ route('user.car.delete', $car) }}' data-method="get" title='Excluir'><i class= 'glyphicon glyphicon-trash'></i></a>
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>

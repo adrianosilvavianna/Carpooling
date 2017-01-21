@@ -29,7 +29,8 @@ class CarController extends Controller
     }
     public function index()
     {
-        $cars = $this->car->get();
+        $cars =  $this->getUser()->Car;
+
         return view('car.index', compact('cars'));
     }
 
@@ -54,14 +55,32 @@ class CarController extends Controller
         }
     }
 
-    public function edit()
+    public function edit(Car $car)
     {
 
+        return view('car.edit')->with('car', $car);
     }
 
-    public function update()
+    public function update(Car $car, Request $request)
     {
+        if($this->validator($request)->fails())
+        {
+            return redirect()->back()->with('error', 'Campos nao preenchidos');
+        }
+        $car->update($request->input());
 
+        return redirect()->back()->with('success', 'Dados atualizados!');
+    }
+
+    public function destroy(Car $car)
+    {
+        try{
+            $car->forceDelete();
+            return redirect()->route('user.car.index')->with('success', 'Excluido!');
+        }catch(\Exception $e)
+        {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 

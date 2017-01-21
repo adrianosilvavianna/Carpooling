@@ -12,4 +12,10 @@ class Car extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function Destine()
+    {
+        return $this->belongsTo(Destine::class);
+    }
 }
+

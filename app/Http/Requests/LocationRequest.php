@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DestineRequest extends FormRequest
+class LocationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,11 @@ class DestineRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'address'           =>  'required|string'    ,
-            'neighborhood'      =>  'required|string'    ,
-            'city'              =>  'required|string'    ,
-            'uf'                =>  'required|string'    ,
+            'location.neighborhood' => 'required|string',
+            'location.address'      => 'required|string',
+            'location.city'         => 'required|string',
+            'location.uf'           => 'required|string',
         ];
     }
 }

@@ -4,20 +4,19 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Editar Destino N° {{ $destine->id }}
+            Editar Destino
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" method="post"   action="{{ route('destine.update', $destine->id) }}" >
-                {{ csrf_field() }}
-                <div class="col-lg-10">
-                    @include('location._inputs')
-                    <div class="form-group pull-right">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Criar</button>
-                        </div>
-                    </div>
+            {!! Form::model(['destine' => '$destine', 'location' => '$destine->Location'], ['route' => ['user.destine.update', $destine], 'class' => 'form-horizontal', 'role' => 'form'] ) !!}
+            {{ method_field('PUT') }}
+
+            @include('location._inputs1')
+            <div class="form-group pull-right">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Criar</button>
                 </div>
-            </form>
+            </div>
+            {!! Form::close() !!}
 
         </div>
     </div>

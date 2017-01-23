@@ -17,5 +17,9 @@ class Car extends Model
     {
         return $this->belongsTo(Destine::class);
     }
-}
 
+    public function Diary()
+    {
+    	return $this->hasOne(Diary::class);
+    }
+}

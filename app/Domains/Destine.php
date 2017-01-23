@@ -13,6 +13,11 @@ class Destine extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function Diary()
+    {
+        return $this->hasOne(Diary::class);  
+    }
+
     public function Location()
     {
         return $this->morphOne(Location::class, 'locationable');

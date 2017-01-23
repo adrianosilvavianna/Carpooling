@@ -16,14 +16,9 @@ class CreateProfilesTable extends Migration
                 $table->increments('id');
                 $table->string('name');
                 $table->string('email');
-                $table->integer('cpf');
-                $table->string('complement');
-                $table->string('number');
+                $table->string('cpf');
                 $table->string('phone');
-                $table->string('neighborhood');
-                $table->string('city');
-                $table->string('address');
-                $table->string('country');
+
                 $table->integer('user_id')->unsigned();
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->timestamps();

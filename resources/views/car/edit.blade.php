@@ -8,7 +8,6 @@
         </div>
         <div class="panel-body">
             <form class="form-horizontal" method="post"   action="{{ route('user.car.update', $car) }}" >
-                {{ csrf_field() }}
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="model_id" class="col-sm-2 control-label">Modelo</label>
@@ -27,7 +26,7 @@
                     <div class="form-group">
                         <label for="capacity_id" class="col-sm-2 control-label">Capacidade</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  name="capacity" id="capacity_id" value="{{ $car->capacity }}">
+                            <input type="number" class="form-control"  name="capacity" id="capacity_id" value="{{ $car->capacity }}">
                         </div>
                     </div>
                     <div class="form-group">

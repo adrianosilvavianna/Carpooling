@@ -18,8 +18,8 @@ class DestineController extends Controller
 
     public function index()
     {
-        $destines = $this->getUser()->Destine;
-        return view('destine.index', compact('destines'));
+        $destines = $this->getUser()->Destines;
+        return view('destine.index')->with('destines', $destines);
     }
 
     public function create()
@@ -40,7 +40,7 @@ class DestineController extends Controller
 
     public function edit(Destine $destine)
     {
-        return view('destine.edit',compact('destine'));
+        return view('destine.edit')->with('destine', $destine);
     }
 
     public function update(Destine $destine, LocationRequest $request)

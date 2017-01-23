@@ -1,15 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.face_page')
 
 @section('getout')
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">Bem Vindo ao Carpooling</div>
-
-        <div class="panel-body">
-            O projjeto Carpooling foi desenvolvido para .................s
+    <section id="main-content">
+      <div class="container">
+        <div class="col-md-12">
+          <div class="main-content-area">
+            <p class="slogan animated fadeInDown">Bem-vindo ao Carpooling</p>
+            <h2 class="animated fadeInDown">Economize dando carona!</h2>
+            <span class="animated fadeInDown">By CinogInfo</span>            
+          </div>
         </div>
-    </div>
-
-
+      </div>
+    </section>
 @endsection

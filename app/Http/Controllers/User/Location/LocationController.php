@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\Car;
+namespace App\Http\Controllers\User\Location;
 
 use App\Domains\Location;
 use App\Http\Controllers\Controller;
@@ -14,3 +14,4 @@ class LocationController extends Controller
         $this->location = $location;
     }
 }
+

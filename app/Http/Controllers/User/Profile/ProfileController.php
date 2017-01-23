@@ -16,21 +16,6 @@ class ProfileController extends Controller
         $this->profile = $profile;
     }
 
-    public function validator(Request $request)
-    {
-        $validator = \Validator::make($request->all(), [
-            'profile.name'              =>  'required|string'           ,
-            'profile.email'              =>  'required|string|email'           ,
-            'profile.phone'             =>  'required|string'           ,
-            'profile.cpf'               =>  'required|'                 ,
-            'location.neighborhood'      =>  'required|string'           ,
-            'location.address'           =>  'required|string'           ,
-            'location.city'              =>  'required|string'           ,
-        ]);
-
-        return $validator;
-    }
-
     public function index()
     {
         try{
@@ -52,20 +37,11 @@ class ProfileController extends Controller
         return view('profile.create');
     }
 
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
-        try{
-            if($this->validator($request)->fails()){
-                return redirect()->back()->with('error', "Campos nao preenchidos");
-            }
-
-            $profile = $this->getUser()->Profile()->create($request->input('profile'));
-            $profile->Location()->create($request->input('location'));
-            return redirect()->route('user.profile.edit')->with('success', 'Perfil Cadastrado!');
-        }catch(\Exception $e)
-        {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $profile = $this->getUser()->Profile()->create($request->input('profile'));
+        $profile->Location()->create($request->input('location'));
+        return redirect()->route('user.profile.edit')->with('success', 'Perfil Cadastrado!');
     }
 
     public function edit()
@@ -74,18 +50,11 @@ class ProfileController extends Controller
         return view('profile.edit', compact('profile'));
     }
 
-    public function update(Request $request)
+    
+    public function update(ProfileRequest $request, Profile $profile)
     {
-        $this->profile = \Auth::User();
-        try{
-            if($this->validator($request)->fails()){
-                return redirect()->back()->with('error', "Campos nao preenchidos");
-            }
-            $this->profile->update($request->input());
-            return redirect()->back()->withInput()->with('success', 'Perfil Atualizado');
-        }catch(\Exception $e)
-        {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        dd($profile);
+        $profile->update($request->input());
+        return redirect()->back()->withInput()->with('success', 'Perfil Atualizado');
     }
 }

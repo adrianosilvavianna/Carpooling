@@ -17,6 +17,11 @@ class UserController extends Controller
         $this->user = $user;
     }
 
+    public function home()
+    {
+        return view('user.home');
+    }
+
     public function index()
     {
         $user = \Auth::User();

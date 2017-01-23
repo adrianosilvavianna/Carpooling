@@ -29,6 +29,6 @@ class CreateDriversTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('drivers');
     }
 }

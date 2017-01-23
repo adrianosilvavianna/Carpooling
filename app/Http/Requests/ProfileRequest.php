@@ -1,8 +1,10 @@
 <?php
-
 namespace App\Http\Requests;
 
-class ProfileRequest extends Request
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +24,13 @@ class ProfileRequest extends Request
     public function rules()
     {
         return [
-            'profile.name'              =>  'required|string'           ,
-            'profile.email'             =>  'required|string|email'     ,
-            'profile.cpf'               =>  'required|'                 ,
-            'profile.phone'             =>  'required|string'           ,
-            'neighborhood'      =>  'required|string'           ,
-            'address'           =>  'required|string'           ,
-            'city'              =>  'required|string'
+            'profile.name'               =>  'required|string'            ,
+            'profile.email'              =>  'required|string|email'     ,
+            'profile.phone'              =>  'required|string'           ,
+            'profile.cpf'                =>  'required|numeric'          ,
+            'location.neighborhood'      =>  'required|string'           ,
+            'location.address'           =>  'required|string'           ,
+            'location.city'              =>  'required|string'           ,
         ];
     }
 }

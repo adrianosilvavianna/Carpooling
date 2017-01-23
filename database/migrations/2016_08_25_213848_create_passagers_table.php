@@ -29,6 +29,6 @@ class CreatePassagersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('passagers');
     }
 }

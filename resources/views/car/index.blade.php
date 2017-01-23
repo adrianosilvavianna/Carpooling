@@ -26,12 +26,11 @@
                             <a href='{{ route('user.car.edit', $car) }}' title='Editar'><i class= 'glyphicon glyphicon-edit'></i></a>
                             <a href='{{ route('user.car.delete', $car) }}' data-method="get" title='Excluir'><i class= 'glyphicon glyphicon-trash'></i></a>
                         </td>
-
+                        
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-
 @endsection

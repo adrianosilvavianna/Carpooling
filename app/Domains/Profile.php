@@ -7,13 +7,13 @@ use App\Domains\Location;
 
 class Profile extends Model
 {
-    protected $fillable = ['name', 'email', 'cpf', 'phone'];
-    protected $hidden = ['user_id'];
+      protected $fillable = ['name', 'email', 'phone','cpf'];
+      protected $hidden = ['user_id'];
 
-    public function User()
-    {
-        return $this->belongsTo(User::class);
-    }
+     public function User()
+     {
+         return $this->belongsTo(User::class);
+     }
 
     public function Location()
     {
